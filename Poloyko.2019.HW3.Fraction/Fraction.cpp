@@ -132,12 +132,22 @@ ostream & operator<<(ostream& stream, const Fraction& fraction)
 {
 	if (fraction.getDenominator() == 1)
 	{
-		return stream << fraction.getNumerator();
+		return stream << fraction.getNumerator() << endl;
 	}
-	else
+	if (fraction.getDenominator() == fraction.getNumerator())
 	{
-		return stream << fraction.getNumerator() << " / " << fraction.getDenominator();
+		return stream << 1 << endl;
 	}
+	return stream << fraction.getNumerator() << " / " << fraction.getDenominator() << endl;
+}
+
+istream& operator>>(istream& stream, Fraction& fraction)
+{
+	cout << "Enter a numerator:";
+	stream >> fraction.numerator;
+	cout << "Enter a denominator: ";
+	stream >> fraction.denominator;
+	return stream;
 }
 
 Fraction& Fraction::operator=(const Fraction & fraction)
