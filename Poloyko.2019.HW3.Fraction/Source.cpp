@@ -18,14 +18,15 @@ int sign(Fraction);
 
 int main()
 {
-	int n = inputSize();
-	Fraction* fractions = allocateMemory(n);
-	setArrayFractions(fractions, n);
-	display(fractions, n);
-	Fraction found = findFraction(fractions, n, isPositive);
-	found.display();
-	quickSort(fractions, 0, n - 1, sign); 
-	display(fractions, n);
+
+	Fraction fraction1, fraction2, fraction3;
+	cin >> fraction1;
+	cin >> fraction2;
+	cout << fraction1;
+	cout << fraction2;
+	fraction3 = fraction1 / fraction2;
+	cout << fraction3;
+	
 	system("pause");
 	return 0;
 }
@@ -123,10 +124,6 @@ void quickSort(Fraction* fractions, int left, int right, Key key)
 	{
 		throw std::invalid_argument("Array can not be null.");
 	}
-	if (left < 0 || right < 0)
-	{
-		throw std::invalid_argument("Arguments cannot be negative.");
-	}
 	int i = left, j = right;
 	Fraction pivot = fractions[(left + right) / 2];
 	while (i <= j)
@@ -155,3 +152,4 @@ void quickSort(Fraction* fractions, int left, int right, Key key)
 		quickSort(fractions, j, right, key);
 	}
 }
+
