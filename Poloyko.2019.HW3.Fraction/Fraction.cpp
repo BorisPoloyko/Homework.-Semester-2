@@ -3,6 +3,10 @@
 
 Fraction::Fraction(int numerator, unsigned int denominator)
 {
+	if (numerator == denominator)
+	{
+		setFraction(1,1);
+	}
 	setFraction(numerator, denominator);
 }
 Fraction::~Fraction()
@@ -47,7 +51,7 @@ bool Fraction::isProper() const
 
 void Fraction::display() const
 {
-	cout << getNumerator() << " / " << getDenominator() << endl;
+	cout << numerator << " / " << denominator << endl;
 }
 
 unsigned int Fraction::GCD(int x, unsigned int y)
@@ -85,20 +89,33 @@ void Fraction::toCommonDenominator(Fraction& fraction1, Fraction& fraction2)
 	fraction2.setFraction(c, d);
 }
 
-Fraction Fraction::plus(Fraction& fraction1, Fraction& fraction2)
+Fraction Fraction::operator+(Fraction& fraction)
 {
-	toCommonDenominator(fraction1, fraction2);
-	Fraction fraction;
-	fraction.setFraction(fraction1.getNumerator() + fraction2.getNumerator(), fraction1.getDenominator());
-	return fraction;
+	toCommonDenominator(fraction, *this);
+	return Fraction(fraction.getNumerator() + this->getNumerator(), fraction.getDenominator());
 }
 
-Fraction Fraction::multiply(Fraction& fraction1, Fraction& fraction2)
+Fraction Fraction::operator-(Fraction& fraction)
 {
-	Fraction fraction;
-	fraction.setFraction(fraction1.getNumerator() * fraction2.getNumerator(), fraction1.getDenominator()*fraction2.getDenominator());
-	return fraction;
+	toCommonDenominator(fraction, *this);
+	return Fraction(fraction.getNumerator() - this->getNumerator(), fraction.getDenominator());
 }
+
+Fraction Fraction::operator-()
+{
+	return Fraction((-this->getNumerator()), this->getDenominator());
+}
+
+Fraction Fraction::operator*(const Fraction& fraction)
+{
+	return Fraction(fraction.getNumerator() * this->getNumerator(), fraction.getDenominator() * this->getDenominator());
+}
+
+Fraction Fraction::operator/(const Fraction& fraction)
+{
+	return Fraction(fraction.getNumerator() * this->getDenominator(), fraction.getDenominator() * this->getNumerator());
+}
+
 
 bool Fraction::isFirstGreater(Fraction fraction1, Fraction fraction2)
 {
@@ -109,4 +126,22 @@ bool Fraction::isFirstGreater(Fraction fraction1, Fraction fraction2)
 int Fraction::sign()
 {
 	return numerator >= 0 ? 1 : -1;
+}
+
+ostream & operator<<(ostream& stream, const Fraction& fraction)
+{
+	if (fraction.getDenominator() == 1)
+	{
+		return stream << fraction.getNumerator();
+	}
+	else
+	{
+		return stream << fraction.getNumerator() << " / " << fraction.getDenominator();
+	}
+}
+
+Fraction& Fraction::operator=(const Fraction & fraction)
+{
+	setFraction(fraction.getNumerator(), fraction.getDenominator());
+	return *this;
 }
