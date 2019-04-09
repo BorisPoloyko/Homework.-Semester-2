@@ -6,6 +6,7 @@ using namespace std;
 class Fraction
 {
 	friend ostream& operator<<(ostream& , const Fraction& );
+	friend istream& operator>>(istream&, Fraction&);
 public:
 	Fraction() : Fraction(1, 1) {}
 	Fraction(int, unsigned int);
@@ -13,8 +14,6 @@ public:
 	int getNumerator() const;
 	unsigned int getDenominator() const;
 	void setFraction(int, unsigned int);
-	void setNumerator(int);
-	void setDenominator(unsigned int);
 	bool isProper() const;
 	void display() const;
 	void reduce();
@@ -33,4 +32,6 @@ private:
 	unsigned int denominator;
 	static unsigned int GCD(int, unsigned int);
 	static unsigned int LCD(int, unsigned int);
+	void setNumerator(int);
+	void setDenominator(unsigned int);
 };
