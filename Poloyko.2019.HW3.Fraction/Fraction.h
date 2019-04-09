@@ -5,6 +5,7 @@ using namespace std;
 
 class Fraction
 {
+	friend ostream& operator<<(ostream& , const Fraction& );
 public:
 	Fraction() : Fraction(1, 1) {}
 	Fraction(int, unsigned int);
@@ -18,8 +19,12 @@ public:
 	void display() const;
 	void reduce();
 	static void toCommonDenominator(Fraction&, Fraction&);
-	static Fraction plus(Fraction&, Fraction&);
-	static Fraction multiply(Fraction&, Fraction&);
+	Fraction& operator=(const Fraction&);
+	Fraction operator+(Fraction&);
+	Fraction operator-(Fraction&);
+	Fraction operator-();
+	Fraction operator*(const Fraction&);
+	Fraction operator/(const Fraction&);
 	static bool isFirstGreater(Fraction, Fraction);
 	int sign();
 
