@@ -35,7 +35,6 @@ double Complex::getImaginary() const
 	return imaginary;
 }
 
-
 Complex::~Complex()
 {
 	cout << "This is the end!";
@@ -75,7 +74,7 @@ Complex Complex::operator/(const Complex& complex)
 	return Complex((a1 * a2 + b1 * b2) / (pow(a2, 2) + pow(b2, 2)), ((a2 * b1 - a1 * b2) / (pow(a2, 2) + pow(b2, 2))));
 }
 
-ostream & operator<<(ostream& stream, const Complex& complex)
+ostream& operator<<(ostream& stream, const Complex& complex)
 {
 	if (complex.getImaginary() > 0 && complex.getReal() != 0)
 	{
@@ -97,4 +96,13 @@ ostream & operator<<(ostream& stream, const Complex& complex)
 	{
 		return stream << complex.getReal() << endl;
 	}
+}
+
+istream& operator>>(istream & stream, Complex& complex)
+{
+	cout << "Input real part: ";
+	stream >> complex.real;
+	cout << "Input imaginary part: ";
+	stream >> complex.imaginary;
+	return stream;
 }
