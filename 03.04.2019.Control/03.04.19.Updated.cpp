@@ -10,7 +10,7 @@ char toUpper(char);
 char* encrypt(char letter);
 char* encrypt(char* word);
 char* task(char*, Encrypt, int);
-char* replaceWord(char* source, char* toBeReplaced, char* replacement);
+char* replaceWord(char* source, char* toBeReplaced, char* replacement, int count);
 int countWords(char*, int);
 
 int main()
@@ -18,7 +18,7 @@ int main()
 	int n = 2;
 
 	char source[] = "Why are we still here? Just to suffer?";
-	
+
 	cout << task(source, encrypt, n) << endl;
 
 	system("pause");
@@ -109,7 +109,7 @@ char* task(char* source, Encrypt cypher, int n)
 	{
 		if (strlen(word) == n)
 		{
-			strcpy(result, replaceWord(result, word, encrypt(word)));
+			strcpy(result, replaceWord(result, word, encrypt(word), count));
 		}
 		word = strtok(0, symbols);
 	}
@@ -117,16 +117,20 @@ char* task(char* source, Encrypt cypher, int n)
 	return result;
 }
 
-char* replaceWord(char* source, char* toBeReplaced, char* replacement)
+char* replaceWord(char* source, char* toBeReplaced, char* replacement, int count)
 {
-	int sourceLength = strlen(source);
 	int difference = strlen(replacement) - strlen(toBeReplaced);
-	char* result = new char[strlen(source) + difference + 1];
+	int sourceLength = strlen(source);
+	char* result = new char[sourceLength + difference * count + 1];
 
-	strncpy(result, source, sourceLength - strlen(strstr(source, toBeReplaced)));
-	result[strlen(source) - strlen(strstr(source, toBeReplaced))] = 0;
-	strcat(result, replacement);
-	strcat(result, strstr(source, toBeReplaced) + strlen(toBeReplaced));
+	do 
+	{
+		strncpy(result, source, sourceLength - strlen(strstr(source, toBeReplaced)));
+		result[sourceLength - strlen(strstr(source, toBeReplaced))] = 0;
+		strcat(result, replacement);
+		strcat(result, strstr(source, toBeReplaced) + strlen(toBeReplaced));
+
+	} while (strstr(result, toBeReplaced));
 
 	return result;
 }
