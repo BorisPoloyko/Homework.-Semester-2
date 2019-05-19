@@ -6,6 +6,7 @@
 
 using namespace std;
 
+int max(int, int);
 void InitFile(char*);
 void DisplayFile(char*);
 void AddToEndFile(char*);
@@ -185,12 +186,17 @@ void SortingFile(char* fileName)
 			case Model:
 				while (streamInOut.read((char*)&carTwo, bufSize))
 				{
-					if (carTwo.GetModel()[0] < carOne.GetModel()[0])
+					int length = max(strlen(carTwo.GetModel()), strlen(carOne.GetModel()));
+					for (int i = 0; i < length; i++)
 					{
-						streamInOut.seekp(-2 * bufSize, ios::cur);
-						streamInOut.write((char*)&carTwo, bufSize);
-						streamInOut.write((char*)&carOne, bufSize);
-						flag = true;
+						if (carTwo.GetModel()[i] < carOne.GetModel()[i])
+						{
+							streamInOut.seekp(-2 * bufSize, ios::cur);
+							streamInOut.write((char*)&carTwo, bufSize);
+							streamInOut.write((char*)&carOne, bufSize);
+							flag = true;
+							break;
+						}
 					}
 					streamInOut.seekp(-bufSize, ios::cur);
 					streamInOut.read((char*)&carOne, bufSize);
@@ -199,12 +205,17 @@ void SortingFile(char* fileName)
 			case Color:
 				while (streamInOut.read((char*)&carTwo, bufSize))
 				{
-					if (carTwo.GetColor()[0] < carOne.GetColor()[0])
+					int length = max(strlen(carTwo.GetColor()), strlen(carOne.GetColor()));
+					for (int i = 0; i < length; i++)
 					{
-						streamInOut.seekp(-2 * bufSize, ios::cur);
-						streamInOut.write((char*)&carTwo, bufSize);
-						streamInOut.write((char*)&carOne, bufSize);
-						flag = true;
+						if (carTwo.GetColor()[i] < carOne.GetColor()[i])
+						{
+							streamInOut.seekp(-2 * bufSize, ios::cur);
+							streamInOut.write((char*)&carTwo, bufSize);
+							streamInOut.write((char*)&carOne, bufSize);
+							flag = true;
+							break;
+						}
 					}
 					streamInOut.seekp(-bufSize, ios::cur);
 					streamInOut.read((char*)&carOne, bufSize);
@@ -213,12 +224,17 @@ void SortingFile(char* fileName)
 			case SerialNumber:
 				while (streamInOut.read((char*)&carTwo, bufSize))
 				{
-					if (carTwo.GetSerialNumber()[0] < carOne.GetSerialNumber()[0])
+					int length = max(strlen(carTwo.GetSerialNumber()), strlen(carOne.GetSerialNumber()));
+					for (int i = 0; i < length; i++)
 					{
-						streamInOut.seekp(-2 * bufSize, ios::cur);
-						streamInOut.write((char*)&carTwo, bufSize);
-						streamInOut.write((char*)&carOne, bufSize);
-						flag = true;
+						if (carTwo.GetSerialNumber()[i] < carOne.GetSerialNumber()[i])
+						{
+							streamInOut.seekp(-2 * bufSize, ios::cur);
+							streamInOut.write((char*)&carTwo, bufSize);
+							streamInOut.write((char*)&carOne, bufSize);
+							flag = true;
+							break;
+						}
 					}
 					streamInOut.seekp(-bufSize, ios::cur);
 					streamInOut.read((char*)&carOne, bufSize);
@@ -227,12 +243,17 @@ void SortingFile(char* fileName)
 			case RegistartionNumber:
 				while (streamInOut.read((char*)&carTwo, bufSize))
 				{
-					if (carTwo.GetRegistrationNumber()[0] < carOne.GetRegistrationNumber()[0])
+					int length = max(strlen(carTwo.GetRegistrationNumber()), strlen(carOne.GetRegistrationNumber()));
+					for (int i = 0; i < length; i++)
 					{
-						streamInOut.seekp(-2 * bufSize, ios::cur);
-						streamInOut.write((char*)&carTwo, bufSize);
-						streamInOut.write((char*)&carOne, bufSize);
-						flag = true;
+						if (carTwo.GetRegistrationNumber()[i] < carOne.GetRegistrationNumber()[i])
+						{
+							streamInOut.seekp(-2 * bufSize, ios::cur);
+							streamInOut.write((char*)&carTwo, bufSize);
+							streamInOut.write((char*)&carOne, bufSize);
+							flag = true;
+							break;
+						}
 					}
 					streamInOut.seekp(-bufSize, ios::cur);
 					streamInOut.read((char*)&carOne, bufSize);
@@ -358,4 +379,9 @@ int SortingMenu()
 		"\n 8 - EXIT\n";
 	cin >> k;
 	return k;
+}
+
+int max(int a, int b)
+{
+	return a > b ? a : b;
 }
