@@ -354,7 +354,7 @@ int Menu()
 	int k;
 	cout << "\n Enter the number - the mode of operations with the file:"
 		"\n 1 - INITIALIZE THE NAME OF THE FILE"
-		"\n 2 - FORMATE OF THE FILE"
+		"\n 2 - INITIALIZE FILE WITH ELEMENTS"
 		"\n 3 - VIEW THE CONTENT OF THE FILE"
 		"\n 4 - ADD AN ELEMENT TO THE FILE"
 		"\n 5 - CHANGE AN ELEMENT IN THE FILE"
